@@ -5,6 +5,7 @@ import UserProfilePage from './UserProfilePage';
 import UserData from './UserData'; // UserData bileşenini içe aktar
 import { ExtendedWebAppUser } from './types';
 import Home from './Hom';
+import TapToEarn from './TapToEarn';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -35,6 +36,8 @@ function App() {
           <Route path="/" element={<Home />} /> {/* Varsayılan sayfa olarak Home bileşenini kullan */}
           <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
           <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
+          <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} /> {/* TapToEarn bileşenini ekledik */}
+
         </Routes>
       </div>
     </Router>
