@@ -1,46 +1,37 @@
 import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
+import UserProfilePage from './UserProfilePage';
+import { ExtendedWebAppUser } from './types';
 
 function App() {
-  const [count, setCount] = useState(0);
   const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState<number>(0); // userId'yi number olarak tanımlayın
+  const [photoUrl, setPhotoUrl] = useState('');
 
   useEffect(() => {
-    const user = WebApp.initDataUnsafe?.user; // Kullanıcı bilgilerini al
+    const user = WebApp.initDataUnsafe?.user as ExtendedWebAppUser;
     if (user) {
       setUsername(user.username || 'Kullanıcı adı yok');
-    } else {
-      setUsername('Kullanıcı adı alınamadı');
+      setUserId(user.id); // id'yi direkt kullanabilirsiniz
+      setPhotoUrl(user.photo ? user.photo.big_file_id : 'default-profile-pic.png');
     }
   }, []);
 
   return (
-    <>
+    <Router>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Vite + React</h1>
+        <nav>
+          <Link to="/">Ana Sayfa</Link>
+          <Link to="/profile">Profil Sayfası</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<div>Hoş geldiniz!</div>} />
+          <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <h2>Kullanıcı Adı: {username}</h2>
-      <div className="card">
-        <button onClick={() => setCount(count + 1)}>
-          Count is {count}
-        </button>
-      </div>
-      <div className="card">
-        <button onClick={() => WebApp.showAlert(`Hello World! Current count is ${count}`)}>
-          Show Alert
-        </button>
-      </div>
-    </>
+    </Router>
   );
 }
 
