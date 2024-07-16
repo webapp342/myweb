@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/webapp342/myweb">
       <div>
         <Link to="/profile">
         <button>Profil Sayfasına Git</button>
@@ -43,7 +43,7 @@ function App() {
 
       </Link>
 
-      
+
         <Routes>
           <Route path="/" />
           <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
