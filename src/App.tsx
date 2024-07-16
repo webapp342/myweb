@@ -5,7 +5,6 @@ import UserProfilePage from './UserProfilePage';
 import UserData from './UserData';
 import UserDetails from './UserDetails';
 import { ExtendedWebAppUser } from './types';
-import Home from './Hom';
 import TapToEarn from './TapToEarn';
 import { saveUserData } from './firestoreUtils';
 
@@ -33,16 +32,20 @@ function App() {
   return (
     <Router>
       <div>
-        <h1>Vite + React</h1>
-        <nav>
-          <Link to="/">Ana Sayfa</Link>
-          <Link to="/profile">Profil Sayfası</Link>
-          <Link to="/user-data">Kullanıcı Verileri</Link>
-          <Link to="/tap-to-earn">Oyna</Link>
-          <Link to="/user-details">Kullanıcı Detayları</Link>
-        </nav>
+        <Link to="/profile">
+        <button>Profil Sayfasına Git</button>
+      </Link>
+      <Link to="/user-data">
+        <button>Kullanıcı Verilerine Git</button>
+      </Link>
+      <Link to="/tap-to-earn">
+      <button>oyna</button>
+
+      </Link>
+
+      
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" />
           <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
           <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
           <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} />
