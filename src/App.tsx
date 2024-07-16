@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
 import UserProfilePage from './UserProfilePage';
 import UserData from './UserData'; // UserData bileşenini içe aktar
+import UserDetails from './UserDetails'; // UserData bileşenini içe aktar
+
 import { ExtendedWebAppUser } from './types';
 import Home from './Hom';
 import TapToEarn from './TapToEarn';
@@ -31,6 +33,8 @@ function App() {
           <Link to="/profile">Profil Sayfası</Link>
           <Link to="/user-data">Kullanıcı Verileri</Link>
           <Link to="/tap-to-earn">oyna</Link>
+          <Link to="/user-details">Kullanıcı Detayları</Link> {/* Yeni linki ekledik */}
+
 
         </nav>
 
@@ -39,6 +43,7 @@ function App() {
           <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
           <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
           <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} /> {/* TapToEarn bileşenini ekledik */}
+          <Route path="/user-details" element={<UserDetails />} /> {/* UserDetails bileşenini ekledik */}
 
         </Routes>
       </div>
