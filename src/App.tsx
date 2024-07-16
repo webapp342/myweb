@@ -21,6 +21,8 @@ function App() {
         setUsername(user.username || 'Kullanıcı adı yok');
         setUserId(user.id);
         setPhotoUrl(user.photo ? user.photo.big_file_id : 'default-profile-pic.png');
+
+        // Kullanıcının verilerini Firestore'a ekle
         await saveUserData(user);
       }
     };
@@ -36,7 +38,7 @@ function App() {
           <Link to="/">Ana Sayfa</Link>
           <Link to="/profile">Profil Sayfası</Link>
           <Link to="/user-data">Kullanıcı Verileri</Link>
-          <Link to="/tap-to-earn">oyna</Link>
+          <Link to="/tap-to-earn">Oyna</Link>
           <Link to="/user-details">Kullanıcı Detayları</Link>
         </nav>
         <Routes>
