@@ -45,8 +45,8 @@ function App() {
 
       
         <Routes>
-          <Route path="/" />
-          <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
+        <Route path="/" element={<Navigate to="/profile" />} />
+        <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
           <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
           <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} />
           <Route path="/user-details" element={<UserDetails />} />
