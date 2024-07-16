@@ -4,6 +4,7 @@ import WebApp from '@twa-dev/sdk';
 import UserProfilePage from './UserProfilePage';
 import UserData from './UserData'; // UserData bileşenini içe aktar
 import { ExtendedWebAppUser } from './types';
+import Home from './Hom';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -23,26 +24,17 @@ function App() {
     <Router>
       <div>
         <h1>Vite + React</h1>
+
         <nav>
           <Link to="/">Ana Sayfa</Link>
           <Link to="/profile">Profil Sayfası</Link>
-          <Link to="/user-data">Kullanıcı Verileri</Link> {/* UserData sayfasına yönlendiren link */}
+          <Link to="/user-data">Kullanıcı Verileri</Link>
         </nav>
+
         <Routes>
-          <Route path="/" element={
-            <div>
-              <h2>Ana Sayfa</h2>
-              <p>Hoş geldiniz!</p>
-              <Link to="/profile">
-                <button>Profil Sayfasına Git</button>
-              </Link>
-              <Link to="/user-data">
-                <button>Kullanıcı Verilerine Git</button>
-              </Link>
-            </div>
-          } />
+          <Route path="/" element={<Home />} /> {/* Varsayılan sayfa olarak Home bileşenini kullan */}
           <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
-          <Route path="/user-data" element={<UserData userId={userId.toString()} />} /> {/* UserData bileşenini ekle */}
+          <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
         </Routes>
       </div>
     </Router>
