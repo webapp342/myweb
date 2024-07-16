@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
 import UserProfilePage from './UserProfilePage';
 import UserData from './UserData';
@@ -22,7 +22,7 @@ function App() {
         setUserId(user.id);
         setPhotoUrl(user.photo ? user.photo.big_file_id : 'default-profile-pic.png');
 
-        // Kullanıcının verilerini Firestore'a ekle
+        // Save user data to Firestore
         await saveUserData(user);
       }
     };
@@ -47,6 +47,7 @@ function App() {
           <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
           <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} />
           <Route path="/user-details" element={<UserDetails />} />
+          <Route path="*" element={<Navigate to="/" />} /> {/* Redirect all unknown paths to Home */}
         </Routes>
       </div>
     </Router>
