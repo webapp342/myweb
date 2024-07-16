@@ -13,6 +13,11 @@ const Home: React.FC = () => {
       <Link to="/user-data">
         <button>Kullanıcı Verilerine Git</button>
       </Link>
+      <Link to="/tap-to-earn">
+      <button>oyna</button>
+
+      </Link>
+
     </div>
   );
 };

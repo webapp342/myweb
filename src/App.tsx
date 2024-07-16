@@ -30,6 +30,8 @@ function App() {
           <Link to="/">Ana Sayfa</Link>
           <Link to="/profile">Profil Sayfası</Link>
           <Link to="/user-data">Kullanıcı Verileri</Link>
+          <Link to="/tap-to-earn">oyna</Link>
+
         </nav>
 
         <Routes>
