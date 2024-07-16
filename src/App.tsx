@@ -7,7 +7,6 @@ import UserDetails from './UserDetails';
 import { ExtendedWebAppUser } from './types';
 import TapToEarn from './TapToEarn';
 import { saveUserData } from './firestoreUtils';
-import Home from './Hom';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -31,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <Router basename="/webapp342/myweb">
+    <Router>
       <div>
         <Link to="/profile">
         <button>Profil Sayfasına Git</button>
@@ -44,10 +43,10 @@ function App() {
 
       </Link>
 
-
+      
         <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
+          <Route path="/" />
+          <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
           <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
           <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} />
           <Route path="/user-details" element={<UserDetails />} />
