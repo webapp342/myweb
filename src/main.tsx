@@ -1,14 +1,31 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
 
-import WebApp from '@twa-dev/sdk'
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Home } from "./pages/Home.tsx";
+import { Contact } from "./pages/Contact.tsx";
 
-WebApp.ready();
+const router = createBrowserRouter([
+  {
+    path: "/webapp/",
+    element: <App />,
+    children: [
+      {
+        path: "/webapp/",
+        element: <Home />,
+      },
+      {
+        path: "/webapp/contact",
+        element: <Contact />,
+      },
+    ],
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
