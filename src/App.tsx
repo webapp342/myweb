@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
 import UserProfilePage from './UserProfilePage';
 import UserData from './UserData';
@@ -13,6 +13,7 @@ function App() {
   const [username, setUsername] = useState('');
   const [userId, setUserId] = useState<number>(0);
   const [photoUrl, setPhotoUrl] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,10 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    navigate('/tap-to-earn'); // Burada yönlendirmek istediğiniz sayfayı belirleyin
+  }, [navigate]);
+
   return (
     <Router>
       <div>
@@ -36,7 +41,7 @@ function App() {
           <Link to="/">Ana Sayfa</Link>
           <Link to="/profile">Profil Sayfası</Link>
           <Link to="/user-data">Kullanıcı Verileri</Link>
-          <Link to="/tap-to-earn">oyna</Link>
+          <Link to="/tap-to-earn">Oyna</Link>
           <Link to="/user-details">Kullanıcı Detayları</Link>
         </nav>
         <Routes>
