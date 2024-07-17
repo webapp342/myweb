@@ -41,7 +41,6 @@ function App() {
           <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
           <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} />
           <Route path="/user-details" element={<UserDetails />} />
-          <Route path="/hom" element={<Home />} />
 
         </Routes>
       </div>
