@@ -1,7 +1,13 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  base: '/myweb/', // Make sure this matches your repo name
+  plugins: [react(), basicSsl()],
+  
+    build: {
+      outDir: './docs'
+    },
+  base: './'
 });
