@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
 import UserProfilePage from './UserProfilePage';
 import UserData from './UserData';
@@ -28,22 +28,13 @@ function App() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    // Uygulama her yenilendiğinde ana sayfaya yönlendirme
-    window.location.href = '/';
-  }, []);
+
 
   return (
     <Router>
       <div>
         <h1>Vite + React</h1>
-        <nav>
-          <Link to="/">Ana Sayfa</Link>
-          <Link to="/profile">Profil Sayfası</Link>
-          <Link to="/user-data">Kullanıcı Verileri</Link>
-          <Link to="/tap-to-earn">Oyna</Link>
-          <Link to="/user-details">Kullanıcı Detayları</Link>
-        </nav>
+     
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
