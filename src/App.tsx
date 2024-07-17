@@ -1,41 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import twaLogo from './assets/tapps.png'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-import WebApp from '@twa-dev/sdk'
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import WebApp from '@twa-dev/sdk';
+import UserProfilePage from './UserProfilePage';
+import UserData from './UserData';
+import UserDetails from './UserDetails';
+import { ExtendedWebAppUser } from './types';
+import Home from './Hom';
+import TapToEarn from './TapToEarn';
+import { saveUserData } from './firestoreUtils';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState<number>(0);
+  const [photoUrl, setPhotoUrl] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = WebApp.initDataUnsafe?.user as ExtendedWebAppUser;
+      if (user) {
+        setUsername(user.username || 'Kullanıcı adı yok');
+        setUserId(user.id);
+        setPhotoUrl(user.photo ? user.photo.big_file_id : 'default-profile-pic.png');
+        await saveUserData(user);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <>
+    <Router>
       <div>
-        <a href="https://ton.org/dev" target="_blank">
-          <img src={twaLogo} className="logo" alt="TWA logo" />
-        </a>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Vite + React</h1>
+        <nav>
+          <Link to="/">Ana Sayfa</Link>
+          <Link to="/profile">Profil Sayfası</Link>
+          <Link to="/user-data">Kullanıcı Verileri</Link>
+          <Link to="/tap-to-earn">oyna</Link>
+          <Link to="/user-details">Kullanıcı Detayları</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<UserProfilePage username={username} userId={userId} photoUrl={photoUrl} />} />
+          <Route path="/user-data" element={<UserData userId={userId.toString()} />} />
+          <Route path="/tap-to-earn" element={<TapToEarn userId={userId.toString()} />} />
+          <Route path="/user-details" element={<UserDetails />} />
+        </Routes>
       </div>
-      <h1>TWA + Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      {/*  */}
-      <div className="card">
-        <button onClick={() => WebApp.showAlert(`Hello World! Current count is ${count}`)}>
-            Show Alert
-        </button>
-      </div>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
